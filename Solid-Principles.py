@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-# LSP: Abstract class ensures subclasses like ReportCard can replace this without altering behavior
 # ISP: Only necessary methods are declared (generate_report), no extra unused methods
 # SRP: This class is responsible for managing student details (name, roll number)
 class Student(ABC):  
@@ -32,8 +31,6 @@ class Subject:
     def get_max_marks(self):
         return self.__max_marks
 
-
-# LSP: Inherits from Student and can be used interchangeably with it
 # SRP: Handles the logic for report cards (marks, total, percentage, grade)
 class ReportCard(Student):  
     def __init__(self, name, roll_number, subjects):
