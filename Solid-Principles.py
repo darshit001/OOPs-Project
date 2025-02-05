@@ -2,9 +2,9 @@ from abc import ABC, abstractmethod
 
 # LSP: Abstract class ensures subclasses like ReportCard can replace this without altering behavior
 # ISP: Only necessary methods are declared (generate_report), no extra unused methods
+# SRP: This class is responsible for managing student details (name, roll number)
 class Student(ABC):  
     def __init__(self, name, roll_number):
-        # SRP: This class is responsible for managing student details (name, roll number)
         self.__name = name
         self.__roll_number = roll_number
        
@@ -14,9 +14,9 @@ class Student(ABC):
     def get_roll_number(self):
         return self.__roll_number
 
+    # ISP: Abstract method ensures subclasses must implement only what's relevant
     @abstractmethod
     def generate_report(self):
-        # ISP: Abstract method ensures subclasses must implement only what's relevant
         pass
 
 
@@ -33,9 +33,8 @@ class Subject:
         return self.__max_marks
 
 
-# SRP: Handles the logic for report cards (marks, total, percentage, grade)
 # LSP: Inherits from Student and can be used interchangeably with it
-# OCP: Can extend functionality (e.g., new grading system) without modifying existing code
+# SRP: Handles the logic for report cards (marks, total, percentage, grade)
 class ReportCard(Student):  
     def __init__(self, name, roll_number, subjects):
         super().__init__(name, roll_number)
@@ -94,6 +93,6 @@ student2 = ReportCard("Bob", 102, [math, science, history])
 student1.enter_marks({"Math": 70, "Science": 90, "English": 88})
 student2.enter_marks({"Math": 100, "Science": 85, "History": 92})
 
-# LSP & OCP: Abstract method `generate_report` implemented in ReportCard ensures seamless use
+# LSP & OCP: Abstract method `generate_report` implemented in ReportCard
 student1.generate_report()
 student2.generate_report()
